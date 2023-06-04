@@ -15,7 +15,7 @@ import Notification from '../components/notification';
 import eventBus from '../utils/event-bus';
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
-  'http://localhost:3000'
+  import.meta.env.VITE_BASE_API_ENDPOINT
 );
 
 const Layout = () => {

@@ -5,7 +5,7 @@ const API_URL = import.meta.env.VITE_BASE_API_ENDPOINT;
 export const signin = async (email: string, password: string) => {
   return await axios
     .post(
-      API_URL + 'auth/signin',
+      API_URL + '/auth/signin',
       {
         email,
         password,
@@ -25,7 +25,7 @@ export const signin = async (email: string, password: string) => {
 export const signup = async (name: string, email: string, password: string) => {
   return await axios
     .post(
-      API_URL + 'auth/signup',
+      API_URL + '/auth/signup',
       {
         name,
         email,
@@ -45,7 +45,7 @@ export const signup = async (name: string, email: string, password: string) => {
 
 export const auth = async () => {
   return await axios
-    .get(API_URL + 'auth', {
+    .get(API_URL + '/auth', {
       headers: {
         'Accept-Encoding': 'application/json',
       },
@@ -58,7 +58,7 @@ export const auth = async () => {
 
 export const logout = async () => {
   return await axios
-    .get(API_URL + 'auth/signout', {
+    .get(API_URL + '/auth/signout', {
       headers: {
         'Accept-Encoding': 'application/json',
       },
@@ -70,7 +70,7 @@ export const logout = async () => {
 };
 
 export const getVideo = async () => {
-  return await axios.get(API_URL + 'videos', {
+  return await axios.get(API_URL + '/videos', {
     headers: {
       'Accept-Encoding': 'application/json',
     },
@@ -79,7 +79,7 @@ export const getVideo = async () => {
 
 export const shareVideo = async (url: string) => {
   return await axios.post(
-    API_URL + 'videos',
+    API_URL + '/videos',
     {
       url,
     },
