@@ -19,29 +19,6 @@ const ShareForm: React.FC = () => {
       .min(8, 'Password must be at least 8 characters'),
   });
 
-  const handleShare = (formValue: { url: string }, { resetForm }) => {
-    const { url } = formValue;
-
-    //  reset message
-    setMsg({ type: 0 });
-
-    shareVideo(url).then(
-      () => {
-        resetForm();
-        setMsg({ type: 1, msg: 'Thanks for your Youtube video' });
-      },
-      (error) => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        setMsg({ type: 2, msg: resMessage });
-      }
-    );
-  };
-
   return (
     <>
       <div className='pt-14'>
@@ -57,7 +34,28 @@ const ShareForm: React.FC = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={handleShare}
+            onSubmit={async (values, actions) => {
+              const { url } = values;
+
+              //  reset message
+              setMsg({ type: 0 });
+
+              shareVideo(url).then(
+                () => {
+                  actions.resetForm();
+                  setMsg({ type: 1, msg: 'Thanks for your Youtube video' });
+                },
+                (error) => {
+                  const resMessage =
+                    (error.response &&
+                      error.response.data &&
+                      error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                  setMsg({ type: 2, msg: resMessage });
+                }
+              );
+            }}
           >
             <Form>
               <div className='mb-6 md:flex md:items-center'>
