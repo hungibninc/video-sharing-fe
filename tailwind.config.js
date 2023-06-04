@@ -1,0 +1,72 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
+    './node_modules/tw-elements/dist/js/**/*.js',
+  ],
+  theme: {
+    fontFamily: {
+      hNormal: ['Helvetica'],
+      hLight: ['Helvetica-Light'],
+      hBold: ['Helvetica-Bold'],
+    },
+    extend: {
+      screens: {
+        sm: '430px',
+      },
+      colors: {
+        state: {
+          DEFAULT: '#F8FAFC',
+          50: '#F8FAFC',
+          100: '#F1F5F9',
+          200: '#E2E8F0',
+          300: '#CBD5E1',
+          400: '#94A3B7',
+          500: '#64758B',
+          600: '#475569',
+          700: '#334155',
+          800: '#1E293B',
+          900: '#0F172A',
+        },
+        success: {
+          DEFAULT: '#3685F2',
+          100: '#d7e7fc',
+          200: '#afcefa',
+          300: '#86b6f7',
+          400: '#5e9df5',
+          500: '#3685f2',
+          600: '#2b6ac2',
+          700: '#205091',
+          800: '#163561',
+          900: '#0b1b30',
+        },
+        error: {
+          DEFAULT: '#F2474A',
+          100: '#fcdadb',
+          200: '#fab5b7',
+          300: '#f79192',
+          400: '#f56c6e',
+          500: '#f2474a',
+          600: '#c2393b',
+          700: '#912b2c',
+          800: '#611c1e',
+          900: '#300e0f',
+        },
+        warning: {
+          DEFAULT: '#FD9248',
+          100: '#ffe9da',
+          200: '#fed3b6',
+          300: '#febe91',
+          400: '#fda86d',
+          500: '#fd9248',
+          600: '#ca753a',
+          700: '#98582b',
+          800: '#653a1d',
+          900: '#331d0e',
+        },
+      },
+    },
+  },
+  plugins: [require('tw-elements/dist/plugin.cjs')],
+};
