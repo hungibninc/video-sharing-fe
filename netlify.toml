@@ -1,8 +1,8 @@
 # example netlify.toml
 [build]
   command = "yarn && npx tailwindcss -i ./src/assets/tailwind/tailwind.css -o ./src/assets/tailwind/tailwind.output.css && yarn build:preview"
-  functions = "netlify/functions"
-  publish = "build"
+  # functions = "netlify/functions"
+  # publish = "build"
 
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
