@@ -29,7 +29,7 @@ const Home = () => {
   }, []);
 
   return (
-    <section className='dark:bg-gray-800 dark:text-gray-100'>
+    <section className='pt-14'>
       {msgError ? (
         <div
           className='relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700'
@@ -40,9 +40,9 @@ const Home = () => {
       ) : (
         videos && (
           <div className='video-list'>
-            {videos.map((video) => (
-              <Video key={video.id} video={video} />
-            ))}
+            {videos
+              ? videos.map((video) => <Video key={video.id} video={video} />)
+              : 'Wait for new video'}
           </div>
         )
       )}

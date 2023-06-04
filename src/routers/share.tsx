@@ -1,8 +1,6 @@
 import ShareForm from '../components/share-form';
 
-type Props = {};
-
-const Share = (props: Props) => {
+const Share = () => {
   return (
     <>
       <ShareForm />

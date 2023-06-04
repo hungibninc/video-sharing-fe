@@ -12,6 +12,7 @@ import { auth } from '../services/service';
 import { AuthContext } from '../context/auth';
 import Header from '../components/header';
 import Notification from '../components/notification';
+import eventBus from '../utils/event-bus';
 
 const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
   'http://localhost:3000'
@@ -19,53 +20,38 @@ const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
 
 const Layout = () => {
   const { authenticated, setAuthenticated } = useContext(AuthContext);
-  const { email, setEmail } = useContext(AuthContext);
+  const { setEmail } = useContext(AuthContext);
 
-  /** socket */
-  const [isConnected, setIsConnected] = useState(socket.connected);
+  /** check auth */
+  useEffect(() => {
+    auth().then((res) => {
+      setAuthenticated(true);
+      setEmail(res.email);
+    });
+  }, []);
+  /** check auth */
+
+  /** notify new video */
   const [notification, setNotification] = useState<IShare[]>([]);
 
   useEffect(() => {
-    socket.on('connect', () => {
-      console.log('connected.');
-      setIsConnected(true);
-    });
-
-    socket.on('disconnect', () => {
-      console.log('disconnected.');
-      setIsConnected(false);
-    });
-
     socket.on('share', (e) => {
-      console.log(e);
-      console.log(email);
-      setNotification((notification) => [e, ...notification]);
-      // if (email && email !== e.email) setNotification(e);
-      // setNotification(e);
+      setNotification([e]);
     });
+
+    eventBus.on('logout', resetNotification);
 
     return () => {
-      console.log('socket.off');
-      socket.off('connect');
-      socket.off('disconnect');
       socket.off('share');
+      eventBus.remove('logout', resetNotification);
     };
   }, []);
-  /** socket */
 
-  /** check auth */
-  useEffect(() => {
-    auth().then(
-      (res) => {
-        setAuthenticated(true);
-        setEmail(res.email);
-      },
-      () => {
-        // no auth
-      }
-    );
-  }, []);
-  /** check auth */
+  //  reset Notification event when logout
+  const resetNotification = () => {
+    setNotification([]);
+  };
+  /** notify new video */
 
   return (
     <div className='container mx-auto mb-20 px-4'>

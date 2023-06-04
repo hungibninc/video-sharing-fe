@@ -1,167 +1,53 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+import { useContext, useEffect, useState } from 'react';
+import { IShare } from '../@types/share';
+import { AuthContext } from '../context/auth';
+import { Alert, Modal, Ripple, initTE } from 'tw-elements';
+import * as te from 'tw-elements';
+import closeIco from '../assets/close.svg';
 
-@layer base {
-	@font-face {
-		font-family: 'Helvetica';
-		src: url('../fonts/Helvetica/Helvetica.ttf');
-	}
-	@font-face {
-		font-family: 'Helvetica-Light';
-		src: url('../fonts/Helvetica/Helvetica-Light.ttf');
-	}
-	@font-face {
-		font-family: 'Helvetica-Bold';
-		src: url('../fonts/Helvetica/Helvetica-Bold.ttf');
-	}
+const Notification = ({ notification }: { notification: IShare[] }) => {
+  const { email } = useContext(AuthContext);
 
-	.Helvetica {
-		@apply font-hNormal;
-	}
-	.Helvetica-Light {
-		@apply font-hLight;
-	}
-	.Helvetica-Bold {
-		@apply font-hBold;
-	}
+  useEffect(() => {
+    console.log('2');
+    initTE({ Alert, Modal, Ripple });
+  });
+  console.log('1');
 
-  body {
-		@apply font-hNormal text-normal;
-	}
-	h1,.h1 {
-		@apply font-hBold text-5xl leading-tight;
-	}
-	h2,.h1 {
-		@apply font-hBold text-4xl leading-tight;
-	}
-	h3,.h3 {
-		@apply font-hBold text-xl sm:text-2xl leading-tight;
-	}
-	h4,.h4 {
-		@apply font-hBold text-xl sm:text-2xl leading-tight;
-	}
-	h5,.h5 {
-		@apply font-hBold text-xl sm:text-2xl leading-tight;
-	}
-	h6,.h6 {
-		@apply font-hBold text-base leading-tight;
-	}
-	a,.a {
-		@apply no-underline;
-	}
-	.button {
-		@apply rounded bg-neutral-700 px-4 py-1 text-white hover:bg-neutral-900 inline-block;
-	}
-}
+  return (
+    <>
+      <div
+        className='mb-3 hidden w-full items-center rounded-lg bg-warning-100 px-6 py-5 text-base text-warning-800 data-[te-alert-show]:inline-flex'
+        role='alert'
+        data-te-alert-init
+        data-te-alert-show
+      >
+        <strong className='mr-1'>Holy guacamole! </strong> You should check in
+        on some of those fields below.
+        <button
+          type='button'
+          className='ml-auto box-content rounded-none border-none p-1 text-warning-900 opacity-50 hover:text-warning-900 hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none'
+          data-te-alert-dismiss
+          aria-label='Close'
+        >
+          <span className='w-[1em] focus:opacity-100 disabled:pointer-events-none disabled:select-none disabled:opacity-25 [&.disabled]:pointer-events-none [&.disabled]:select-none [&.disabled]:opacity-25'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 24 24'
+              fill='currentColor'
+              className='h-6 w-6'
+            >
+              <path
+                fillRule='evenodd'
+                d='M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z'
+                clipRule='evenodd'
+              />
+            </svg>
+          </span>
+        </button>
+      </div>
+    </>
+  );
+};
 
-@layer components {
-  .text-small {
-		@apply text-xs leading-7;
-	}
-	.text-normal {
-		@apply text-base leading-normal;
-	}
-	.text-large {
-		@apply Helvetica-Light text-xl font-light;
-	}
-  .content {
-		@apply mx-auto max-w-5xl px-5;
-	}
-	.title {
-		@apply text-red-700 leading-none mt-4 lg:mt-0;
-	}
-  .form-error-message {
-		@apply text-error text-small italic leading-normal;
-	}
-	.error-message {
-		@apply bg-error-100 border-t border-b border-error-500 text-error-700 px-4 py-3 mb-12;
-	}
-	.success-message {
-		@apply bg-success-100 border-t border-b border-success-500 text-success-700 px-4 py-3 mb-12;
-	}
-	.warning-message {
-		@apply bg-warning-100 border-t border-b border-warning-500 text-warning-700 px-4 py-3 mb-12;
-	}
-	.modal-bg {
-		@apply fixed top-0 bottom-0 left-0 right-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none p-0;
-	}
-
-	.small-modal-box {
-		@apply pointer-events-none relative flex flex-col min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[480px];
-	}
-
-	.modal-box {
-		@apply pointer-events-none relative flex flex-col min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[590px];
-	}
-
-	.big-modal-box {
-		@apply pointer-events-none relative flex flex-col min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[764px];
-	}
-	.modal-shadow {
-		@apply pointer-events-auto relative flex w-full flex-col gap-2.5 border-none bg-white bg-clip-padding p-2.5 text-current shadow-lg outline-none ;
-	}
-	.modal-container {
-		@apply items-center justify-center border border-black text-center p-6 md:p-16;
-	}
-
-	.modal-backBtnContainer {
-		@apply h-12 w-full bg-white flex justify-start items-center;
-	}
-	.modal-backBtn {
-		@apply no-underline cursor-pointer text-blue-300;
-	}
-	.modal-backIco {
-		@apply ml-[24px] mr-[10px] md:mr-[20px];
-	}
-
-  /*header*/
-  .header {
-    @apply mt-4 mb-8 grid lg:grid-cols-3 gap-4 border-b-2 border-solid border-black pb-4;
-  }
-  .logo {
-    @apply flex items-center justify-center lg:justify-start;
-  }
-  .login {
-    @apply lg:col-span-2;
-  }
-  .container-user{
-		@apply flex flex-col md:flex-row lg:col-span-2 gap-3 pt-[3px] md:place-content-center lg:place-content-end place-content-start;
-		span {
-			@apply inline-block
-		}
-	}
-	.container-user-form{
-		@apply flex flex-col md:flex-row gap-3 pt-[3px] md:place-content-center lg:place-content-end place-content-start;
-    label {
-      @apply block md:hidden mb-1;
-    }
-	}
-	.form-control{
-		@apply rounded-md border px-2 py-1 border-black;
-	}
-  /*header*/
-
-  /*videeolist*/
-  .video-list {
-    @apply space-y-6 sm:space-y-12;
-  }
-  .video-item {
-    @apply gap-6 dark:bg-gray-900 lg:grid lg:grid-cols-12;
-  }
-  .video-player {
-    @apply rounded dark:bg-gray-500 lg:col-span-5;
-  }
-  /*videeolist*/
-}
-
-@layer utilities {
-	.container {
-		@apply mx-auto max-w-screen-2xl px-6;
-	}
-  
-}
-
-html,body{
-	@apply font-normal;
-}
+export default Notification;
