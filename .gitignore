@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+/src/assets/tailwind/tailwind.output.css
+# Local Netlify folder
+.netlify
