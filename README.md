@@ -55,7 +55,7 @@ This command will install all the necessary dependencies in your system.
 
 ## Running the app
 
-**Note:** _Funny Movie API backend must start first_
+**Note:** _Funny Movie API backend must start first_. The [repo for the front-end is here](https://github.com/hungibninc/video-sharing-fe)
 
 #### development mode
 ```bash
