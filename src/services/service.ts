@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_BASE_API_ENDPOINT;
+const API_URL = 'http://localhost:3000';
 
 export const signin = async (email: string, password: string) => {
   return await axios
