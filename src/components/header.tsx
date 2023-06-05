@@ -144,7 +144,11 @@ const Header: React.FC = () => {
                 </div>
 
                 <div className='form-group'>
-                  <button type='submit' className='button'>
+                  <button
+                    type='submit'
+                    className='button'
+                    aria-label='login-btn'
+                  >
                     <span>Login</span>
                   </button>
                 </div>
